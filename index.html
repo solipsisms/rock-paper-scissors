@@ -50,13 +50,32 @@
             //use console.log() to display the results
             //use prompt to get input from the user
 
+            //player, computer scores
+            let finalResults = [0, 0];
+
             for (let i = 1; i <= 5; i++) {
                 //prompt user for their move
+                let playerMove = prompt("Please choose Rock, Paper, or Scissors.");
                 //"prompt" computer for their move
+                let computerMove = getComputerChoise();
                 //playround
-                //get returned results, and print the message with current score with button
+                let roundResults = playRound(playerMove, computerMove);
+                //get returned results,
+                if (roundResults.substring(4, 7) === "win") {
+                    finalResults[0] += 1;
+                } else {
+                    finalResults[1] += 1;
+                }
+
+                //and print the message with current score with button
+                alert(roundResults + "." + "The current score is " + finalResults[0] + "-" + finalResults[1]);
             }
             //when the game is over (five rounds have been played) print the final score and message of who won
+            if (finalResults[0] > finalResults[1]) {
+                alert("Player won! The final score was " + finalResults[0] + "-" + finalResults[1]);
+            } else {
+                alert("Computer won. The final score was " + finalResults[0] + "-" + finalResults[1]);
+            }
         }
     </script>
 </body>
