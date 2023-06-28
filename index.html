@@ -10,6 +10,11 @@
         function getComputerChoice() {
             //randomly return 'Rock' 'Paper' or 'Scissors'
             //this is the function for the computers play
+
+            let moves = ['Rock', 'Paper', 'Scissors'];
+            let move = Math.random() * 3;
+            return moves[move];
+
         }
 
         function playRound(playerSelection, computerSelection) {
