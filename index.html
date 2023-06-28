@@ -24,6 +24,9 @@
             //return results of function call, not console.log()
             // -> console.log(playRound(playerSelection, computerSelection));
 
+            //let playerSelection = playerSelection.toLowerCase();
+            //let playerSelection = playerSelection.charAt[0].toUpperCase();
+
             //computer wins
             if (playerSelection === "Rock" && computerSelection === "Paper") {
                 return "You Lose! Paper beats Rock";
@@ -57,11 +60,11 @@
                 //prompt user for their move
                 let playerMove = prompt("Please choose Rock, Paper, or Scissors.");
                 //"prompt" computer for their move
-                let computerMove = getComputerChoise();
+                let computerMove = getComputerChoice();
                 //playround
                 let roundResults = playRound(playerMove, computerMove);
                 //get returned results,
-                if (roundResults.substring(4, 7) === "win") {
+                if (roundResults.substring(0, 7) === "You win") {
                     finalResults[0] += 1;
                 } else {
                     finalResults[1] += 1;
