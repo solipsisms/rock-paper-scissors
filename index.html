@@ -12,7 +12,9 @@
             //this is the function for the computers play
 
             let moves = ["Rock", "Paper", "Scissors"];
-            let move = Math.random() * 3;
+            //console.log(moves);
+            let move = Math.floor(Math.random() * 3);
+            //console.log(move);
             return moves[move];
 
         }
@@ -27,22 +29,24 @@
             //let playerSelection = playerSelection.toLowerCase();
             //let playerSelection = playerSelection.charAt[0].toUpperCase();
 
+            if (playerSelection)
+
             //computer wins
-            if (playerSelection === "Rock" && computerSelection === "Paper") {
+            if (playerSelection === "rock" && computerSelection === "Paper") {
                 return "You Lose! Paper beats Rock";
-            } else if (playerSelection === "Paper" && computerSelection === "Scissors") {
+            } else if (playerSelection === "paper" && computerSelection === "Scissors") {
                 return "You Lose! Scissors beats Paper";
-            } else if (playerSelection === "Scissors" && computerSelection === "Rock") {
+            } else if (playerSelection === "scissors" && computerSelection === "Rock") {
                 return "You Lose! Rock beats Scissors";
             //player wins
-            } else if (playerSelection === "Rock" && computerSelection === "Scissors") {
+            } else if (playerSelection === "rock" && computerSelection === "Scissors") {
                 return "You Win! Rock beats Scissors";
-            } else if (playerSelection === "Scissors" && computerSelection === "Paper") {
+            } else if (playerSelection === "scissors" && computerSelection === "Paper") {
                 return "You win! Scissors beats Paper";
-            } else if (playerSelection === "Paper" && computerSelection === "Rock") {
+            } else if (playerSelection === "paper" && computerSelection === "Rock") {
                 return "You win! Paper beats Rock";
             //tie
-            } else if (playerSelection === computerSelection) {
+            } else {
                 return "Tie.";
             }
         }
@@ -55,23 +59,43 @@
 
             //player, computer scores
             let finalResults = [0, 0];
+            let moves = ["rock", "paper", "scissors"];
 
             for (let i = 1; i <= 5; i++) {
                 //prompt user for their move
                 let playerMove = prompt("Please choose Rock, Paper, or Scissors.");
+                //if cancel or empty input
+                if (playerMove === null || playerMove.trim() === "") {
+                    alert("Game canceled.");
+                    return;
+                } else {
+                    playerMove = playerMove.toLowerCase();
+                } 
+                if (!moves.includes(playerMove)) {
+                        alert("Invalid input. Please choose Rock, Paper, or Scissors.");
+                        continue;
+                }
+                
                 //"prompt" computer for their move
                 let computerMove = getComputerChoice();
+                //console.log(computerMove);
                 //playround
                 let roundResults = playRound(playerMove, computerMove);
                 //get returned results,
-                if (roundResults.substring(0, 7) === "You win") {
+                if (roundResults.startsWith("You win")) {
                     finalResults[0] += 1;
-                } else {
+                    alert(roundResults + ". " + "The current score is " + finalResults[0] + "-" + finalResults[1]);
+                    //i++;
+                } else if (roundResults.startsWith("You lose")) {
                     finalResults[1] += 1;
+                    alert(roundResults + ". " + "The current score is " + finalResults[0] + "-" + finalResults[1]);
+                    //i++;
+                } else if (roundResults.startsWith("Tie")){
+                    alert("Tie. Score and number of rounds will not be affected.")
+                } else {
+                    alert(roundResults);
                 }
-
                 //and print the message with current score with button
-                alert(roundResults + "." + "The current score is " + finalResults[0] + "-" + finalResults[1]);
             }
             //when the game is over (five rounds have been played) print the final score and message of who won
             if (finalResults[0] > finalResults[1]) {
