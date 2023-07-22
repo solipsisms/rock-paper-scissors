@@ -8,94 +8,81 @@
 <body>
     <script>
         function getComputerChoice() {
-            //randomly return 'Rock' 'Paper' or 'Scissors'
-            //this is the function for the computers play
-
+            //possible moves the computer can make
             let moves = ["Rock", "Paper", "Scissors"];
-            //console.log(moves);
-            let move = Math.floor(Math.random() * 3);
-            //console.log(move);
+            //choose a random move
+            let move = Math.floor(Math.random() * moves.length);
+            //return the move
             return moves[move];
-
         }
 
         function playRound(playerSelection, computerSelection) {
-            //take two parameters, the moves of each of the players for a single round
-            //return a string that declares the winner of the round -> "You Lose! Paper beats Rock"
-            //make playerSelection case-insensitive
-            //return results of function call, not console.log()
-            // -> console.log(playRound(playerSelection, computerSelection));
-
-            //let playerSelection = playerSelection.toLowerCase();
-            //let playerSelection = playerSelection.charAt[0].toUpperCase();
-
-            if (playerSelection)
+            //any player's move that is not expected is handled in the main function
+            //otherwise handled here
 
             //computer wins
             if (playerSelection === "rock" && computerSelection === "Paper") {
-                return "You Lose! Paper beats Rock";
+                return "Loser! Paper beats Rock";
             } else if (playerSelection === "paper" && computerSelection === "Scissors") {
-                return "You Lose! Scissors beats Paper";
+                return "Loser! Scissors beats Paper";
             } else if (playerSelection === "scissors" && computerSelection === "Rock") {
-                return "You Lose! Rock beats Scissors";
+                return "Loser! Rock beats Scissors";
             //player wins
             } else if (playerSelection === "rock" && computerSelection === "Scissors") {
-                return "You Win! Rock beats Scissors";
+                return "Winner! Rock beats Scissors";
             } else if (playerSelection === "scissors" && computerSelection === "Paper") {
-                return "You win! Scissors beats Paper";
+                return "Winner! Scissors beats Paper";
             } else if (playerSelection === "paper" && computerSelection === "Rock") {
-                return "You win! Paper beats Rock";
+                return "Winner! Paper beats Rock";
             //tie
             } else {
+                console.log("tie");
                 return "Tie.";
             }
         }
 
         function game() {
-            //use playRound in here to play a 5 round game that keeps score and reports the winner or loser at the end (use the return string)
-            //can use loops instead of calling function 5 times
-            //use console.log() to display the results
-            //use prompt to get input from the user
-
-            //player, computer scores
+            //set up score board
             let finalResults = [0, 0];
+            //once five rounds have been played the game is over
+            let rounds = 0;
+            //possible moves
             let moves = ["rock", "paper", "scissors"];
-
-            for (let i = 1; i <= 5; i++) {
-                //prompt user for their move
+            while (rounds < 5) {
+                //ask player for their move
                 let playerMove = prompt("Please choose Rock, Paper, or Scissors.");
-                //if cancel or empty input
+                //if the player hits cancel or types an empty message, end the game
                 if (playerMove === null || playerMove.trim() === "") {
-                    alert("Game canceled.");
+                    alert("Game cancelled");
                     return;
                 } else {
+                    //otherwise, change the player's move to all lower case so it can be determined regardless of how it was typed (as long as it was correctly)
                     playerMove = playerMove.toLowerCase();
-                } 
-                if (!moves.includes(playerMove)) {
+                    //if the player types something that is not a valid move, start over and do not count this as a round
+                    if (!moves.includes(playerMove)) {
                         alert("Invalid input. Please choose Rock, Paper, or Scissors.");
                         continue;
+                    }
+                    //get the computer's move
+                    let computerMove = getComputerChoice();
+                    //let function calculate who would wins this round
+                    let roundResults = playRound(playerMove, computerMove);
+                    if (roundResults.startsWith("Winner")) {
+                        finalResults[0]++;
+                        alert("Player won this round! The current score is " + finalResults[0] + "-" + finalResults[1]);
+                        rounds++;
+                    } else if (roundResults.startsWith("Loser")) {
+                        finalResults[1]++;
+                        alert("Computer won this round. The current score is " + finalResults[0] + "-" + finalResults[1]);
+                        rounds++;
+                    } else if (roundResults.startsWith("Tie")) {
+                        alert("Tie. Score and number of rounds will not be affected.");
+                        continue;
+                    } else {
+                        alert("Score and number of rounds will not be affected.");
+                        continue;
+                    }
                 }
-                
-                //"prompt" computer for their move
-                let computerMove = getComputerChoice();
-                //console.log(computerMove);
-                //playround
-                let roundResults = playRound(playerMove, computerMove);
-                //get returned results,
-                if (roundResults.startsWith("You win")) {
-                    finalResults[0] += 1;
-                    alert(roundResults + ". " + "The current score is " + finalResults[0] + "-" + finalResults[1]);
-                    //i++;
-                } else if (roundResults.startsWith("You lose")) {
-                    finalResults[1] += 1;
-                    alert(roundResults + ". " + "The current score is " + finalResults[0] + "-" + finalResults[1]);
-                    //i++;
-                } else if (roundResults.startsWith("Tie")){
-                    alert("Tie. Score and number of rounds will not be affected.")
-                } else {
-                    alert(roundResults);
-                }
-                //and print the message with current score with button
             }
             //when the game is over (five rounds have been played) print the final score and message of who won
             if (finalResults[0] > finalResults[1]) {
