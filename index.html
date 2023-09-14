@@ -7,6 +7,26 @@
 </head>
 <body>
     <script>
+
+        //buttons
+        const rock = document.createElement('button');
+        rock.innerText = 'Rock';
+        rock.addEventListener('click', () => {
+            //player plays rock
+        })
+
+        const paper = document.createElement('button');
+        paper.innerText = 'Paper';
+        paper.addEventListener('click', () => {
+            //player plays paper
+        })
+
+        const scissors = document.createElement('button');
+        scissors.innerText = 'Scissors';
+        scissors.addEventListener('click', () => {
+            //player plays scissors
+        })
+
         function getComputerChoice() {
             //possible moves the computer can make
             let moves = ["Rock", "Paper", "Scissors"];
@@ -48,7 +68,9 @@
             let rounds = 0;
             //possible moves
             let moves = ["rock", "paper", "scissors"];
-            while (rounds < 5) {
+
+            //removed logic to only play 5 rounds
+            while (rounds = 0) {
                 //ask player for their move
                 let playerMove = prompt("Please choose Rock, Paper, or Scissors.");
                 //if the player hits cancel or types an empty message, end the game
