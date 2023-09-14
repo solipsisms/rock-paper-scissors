@@ -12,20 +12,27 @@
         const rock = document.createElement('button');
         rock.innerText = 'Rock';
         rock.addEventListener('click', () => {
-            //player plays rock
+            let computerMove = getComputerChoice();
+            playRound('rock', computermove);
         })
 
         const paper = document.createElement('button');
         paper.innerText = 'Paper';
         paper.addEventListener('click', () => {
-            //player plays paper
+            let computerMove = getComputerChoice();
+            playRound('paper', computermove);
         })
 
         const scissors = document.createElement('button');
         scissors.innerText = 'Scissors';
         scissors.addEventListener('click', () => {
-            //player plays scissors
+            let computerMove = getComputerChoice();
+            playRound('scissors', computermove);
         })
+
+        document.body.appendChild(rock)
+        document.body.appendChild(paper)
+        document.body.appendChild(scissors)
 
         function getComputerChoice() {
             //possible moves the computer can make
