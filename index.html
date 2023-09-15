@@ -7,7 +7,7 @@
 </head>
 <body>
 
-    <div id="round-results">0-0</div>
+    <div id="round-results">Choose a move to start a game!</div>
 
     <script>
 
@@ -63,104 +63,44 @@
                 if (playerSelection === "rock" && computerSelection === "Paper") {
                     computerPoints += 1;
                     rounds += 1;
+                    document.getElementById("round-results").innerHTML = "The computer won this round. The current score is " + playerPoints + "-" + computerPoints;
                 } else if (playerSelection === "paper" && computerSelection === "Scissors") {
                     computerPoints += 1;
                     rounds += 1;
+                    document.getElementById("round-results").innerHTML = "The computer won this round. The current score is " + playerPoints + "-" + computerPoints;
                 } else if (playerSelection === "scissors" && computerSelection === "Rock") {
                     computerPoints += 1;
                     rounds += 1;
+                    document.getElementById("round-results").innerHTML = "The computer won this round. The current score is " + playerPoints + "-" + computerPoints;
                 //player wins
                 } else if (playerSelection === "rock" && computerSelection === "Scissors") {
                     playerPoints += 1;
                     rounds += 1;
+                    document.getElementById("round-results").innerHTML = "The player won this round! The current score is " + playerPoints + "-" + computerPoints;
                 } else if (playerSelection === "scissors" && computerSelection === "Paper") {
                     playerPoints += 1;
                     rounds += 1;
+                    document.getElementById("round-results").innerHTML = "The player won this round! The current score is " + playerPoints + "-" + computerPoints;
                 } else if (playerSelection === "paper" && computerSelection === "Rock") {
                     playerPoints += 1;
                     rounds += 1;
+                    document.getElementById("round-results").innerHTML = "The player won this round! The current score is " + playerPoints + "-" + computerPoints;
                 //tie
                 } else {
-                    document.getElementById("round-results").innerHTML = "Tie.";
-                    return "Tie.";
+                    document.getElementById("round-results").innerHTML = "Tie. The current score is " + playerPoints + "-" + computerPoints;
                 }
             //max rounds, end gameplay
             } else {
                 //computer wins the game
                 if (computerPoints > playerPoints) {
-                    document.getElementById("round-results").innerHTML = "The Computer Won the Game.";
+                    document.getElementById("round-results").innerHTML = "The Computer won the game. The final score was " + playerPoints + "-" + computerPoints;
                 }
                 //player wins the game
                 if (playerPoints > computerPoints) {
-                    document.getElementById("round-results").innerHTML = "The Player Won the Game!"
+                    document.getElementById("round-results").innerHTML = "The player won the game! The final score was " + playerPoints + "-" + computerPoints;
                 }
             }
 
-        }
-
-        /*
-
-        still need to:
-        - display running score (rather than text)
-        - fix ties not counting as rounds (possibly, need above to properly test)
-        - rounds are not properly counting
-
-        - can do aesthetic ui!
-
-        */
-         
-
-        function game() {
-            //set up score board
-            let finalResults = [0, 0];
-            //once five rounds have been played the game is over
-            let rounds = 0;
-            //possible moves
-            let moves = ["rock", "paper", "scissors"];
-
-            //removed logic to only play 5 rounds
-            while (rounds = 0) {
-                //ask player for their move
-                let playerMove = prompt("Please choose Rock, Paper, or Scissors.");
-                //if the player hits cancel or types an empty message, end the game
-                if (playerMove === null || playerMove.trim() === "") {
-                    alert("Game cancelled");
-                    return;
-                } else {
-                    //otherwise, change the player's move to all lower case so it can be determined regardless of how it was typed (as long as it was correctly)
-                    playerMove = playerMove.toLowerCase();
-                    //if the player types something that is not a valid move, start over and do not count this as a round
-                    if (!moves.includes(playerMove)) {
-                        alert("Invalid input. Please choose Rock, Paper, or Scissors.");
-                        continue;
-                    }
-                    //get the computer's move
-                    let computerMove = getComputerChoice();
-                    //let function calculate who would wins this round
-                    let roundResults = playRound(playerMove, computerMove);
-                    if (roundResults.startsWith("Winner")) {
-                        finalResults[0]++;
-                        alert("Player won this round! The current score is " + finalResults[0] + "-" + finalResults[1]);
-                        rounds++;
-                    } else if (roundResults.startsWith("Loser")) {
-                        finalResults[1]++;
-                        alert("Computer won this round. The current score is " + finalResults[0] + "-" + finalResults[1]);
-                        rounds++;
-                    } else if (roundResults.startsWith("Tie")) {
-                        alert("Tie. Score and number of rounds will not be affected.");
-                        continue;
-                    } else {
-                        alert("Score and number of rounds will not be affected.");
-                        continue;
-                    }
-                }
-            }
-            //when the game is over (five rounds have been played) print the final score and message of who won
-            if (finalResults[0] > finalResults[1]) {
-                alert("Player won! The final score was " + finalResults[0] + "-" + finalResults[1]);
-            } else {
-                alert("Computer won. The final score was " + finalResults[0] + "-" + finalResults[1]);
-            }
         }
     </script>
 </body>
